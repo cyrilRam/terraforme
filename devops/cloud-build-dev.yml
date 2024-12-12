@@ -1,3 +1,7 @@
+options:
+  logging: CLOUD_LOGGING_ONLY  # Si vous voulez que les logs vont dans Cloud Logging seulement
+  default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET  # Crée un bucket automatiquement
+
 substitutions:
   _REGION: "us-central1"
   _PROJECT_ID: "cours-terraform"
