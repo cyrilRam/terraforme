@@ -1,0 +1,38 @@
+substitutions:
+  _REGION: "us-central1"
+  _PROJECT_ID: "cours-terraform"
+  _REPO_NAME: "dev-rep"
+  _IMAGE_NAME: "test-terra-docker"
+  _TAG: "latest"
+
+steps:
+  - name: 'hashicorp/terraform:latest'
+    id: 'Terraform'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        cd terraform/environments/dev
+        terraform init
+        terraform plan
+        terraform apply -auto-approve
+        cd ../../..
+
+  - name: 'docker'
+    id: 'Build Docker Image'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        docker build -t $_REGION-docker.pkg.dev/$_PROJECT_ID/$_REPO_NAME/$_IMAGE_NAME:$_TAG .
+
+  - name: 'docker'
+    id: 'Push Docker Image'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        docker push $_REGION-docker.pkg.dev/$_PROJECT_ID/$_REPO_NAME/$_IMAGE_NAME:$_TAG
+
+images:
+  - '$_REGION-docker.pkg.dev/$_PROJECT_ID/$_REPO_NAME/$_IMAGE_NAME:$_TAG'

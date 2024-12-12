@@ -1,0 +1,2 @@
+pour env je fais tout auto, la pipleine mconstuit l'image et du couop le run ca le met a jour grace a terraform.
+
