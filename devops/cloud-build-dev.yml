@@ -11,12 +11,12 @@ substitutions:
 
 steps:
   - name: 'hashicorp/terraform:latest'
-    id: 'Terraform'
-    entrypoint: 'bash'
+    id: 'Terraform Init and Apply'
+    entrypoint: 'sh'
     args:
       - '-c'
       - |
-        cd terraform/environments/dev
+        cd terraform/environnement/dev
         terraform init
         terraform plan
         terraform apply -auto-approve
