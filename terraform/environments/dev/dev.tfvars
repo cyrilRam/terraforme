@@ -1,2 +1,6 @@
-service_run_name = "test-terra-app-dev"
+region = "us-central1"
 repo_name="dev-repo"
+project_id="cours-terraform"
+run_service_name="test-terra-app-dev"
+image_name="test-terra-docker"
+tag="latest"
