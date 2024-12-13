@@ -18,4 +18,17 @@ resource "google_cloud_run_service" "cloud_run_service" {
     percent = 100
     latest_revision = true
   }
+
+}
+
+# Autoriser l'accès non authentifié au service Cloud Run
+resource "google_cloud_run_service_iam_binding" "public_access" {
+  project  = var.project_id
+  location = var.region
+  service  = google_cloud_run_service.cloud_run_service.name
+  role     = "roles/run.invoker"
+
+  members = [
+    "allUsers"
+  ]
 }
