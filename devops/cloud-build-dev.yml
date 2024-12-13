@@ -20,7 +20,7 @@ steps:
         cd terraform/environments/dev
         terraform init
         terraform plan
-        terraform apply -auto-approve -var-file=dev.tfvars
+        
 
   # Étape Docker : Build de l'image Docker
   - name: 'docker'

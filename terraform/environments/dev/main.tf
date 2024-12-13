@@ -1,21 +1,30 @@
+locals {
+  region = "us-central1"
+  repo_name="dev-repo"
+  project_id="cours-terraform"
+  run_service_name="test-terra-app-dev"
+  image_name="test-terra-docker"
+  tag="latest"
+}
+
 module "artifact_registry" {
   source     = "./../../modules/artifactory"
-  project_id = var.project_id
-  region     = var.region
-  repo_name  = var.repo_name
+  project_id = local.project_id
+  region     = local.region
+  repo_name  = local.repo_name
 }
 
 module "activate_api"{
   source     = "./../../modules/api"
-  project_id = var.project_id
+  project_id = local.project_id
 }
 
 module "cloud_run_service"{
   source     = "./../../modules/run"
-  region = var.region
-  project_id = var.project_id
-  run_service_name=var.run_service_name
-  image_name = var.image_name
-  repo_name = var.repo_name
-  tag = var.tag
+  region = local.region
+  project_id = local.project_id
+  run_service_name=local.run_service_name
+  image_name = local.image_name
+  repo_name = local.repo_name
+  tag = local.tag
 }
