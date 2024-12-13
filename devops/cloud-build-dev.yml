@@ -5,7 +5,7 @@ options:
 substitutions:
   _REGION: "us-central1"
   _PROJECT_ID: "cours-terraform"
-  _REPO_NAME: "dev-rep"
+  _REPO_NAME: "dev-repo"
   _IMAGE_NAME: "test-terra-docker"
   _TAG: "latest"
 
