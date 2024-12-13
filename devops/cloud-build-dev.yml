@@ -10,17 +10,6 @@ substitutions:
   _TAG: "latest"
 
 steps:
-  # Étape Terraform : Init, Plan et Apply
-  - name: 'hashicorp/terraform:latest'
-    id: 'Terraform Init and Apply'
-    entrypoint: 'sh'
-    args:
-      - '-c'
-      - |
-        cd terraform/environments/dev
-        terraform init
-        terraform plan
-        
 
   # Étape Docker : Build de l'image Docker
   - name: 'docker'
@@ -39,6 +28,18 @@ steps:
       - '-c'
       - |
         docker push $_REGION-docker.pkg.dev/$_PROJECT_ID/$_REPO_NAME/$_IMAGE_NAME:$_TAG
+
+    # Étape Terraform : Init, Plan et Apply
+  - name: 'hashicorp/terraform:latest'
+    id: 'Terraform Init and Apply'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        cd terraform/environments/dev
+        terraform init
+        terraform plan
+        terraform apply -auto-approve 
 
 images:
   - '$_REGION-docker.pkg.dev/$_PROJECT_ID/$_REPO_NAME/$_IMAGE_NAME:$_TAG'

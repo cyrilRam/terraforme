@@ -7,4 +7,4 @@ ADD . /app
 # Make the container's port 80 available to the outside world
 EXPOSE 80
 # Run app.js using node when the container launches
-CMD ["node", "app.js"]
+CMD ["node", "src/App.js"]
